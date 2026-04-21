@@ -1,0 +1,27 @@
+\problemname{Scavenger Hunt}
+
+A company is organizing a large scavenger hunt for its employees. 
+They've set up a lot of stations for the hunt. Each station is denoted by a number from 0 to N-1.
+Every group starts at station 0 (at the company office). At each station, they get redirected to 
+an arbitrary next stations, until they reach the last station, station N-1, where the summer party is waiting for them.
+
+The company has designed a generator to produce routes for the groups, so they get different routes. 
+A route is chain of stations (from $0$ to $N-1$). Not every route must visit every station - it is valid as long as it reaches the summer party.
+
+Unfortunately, they are not very good at IT. They have discovered that the generator sometimes produce
+bogus routes, such as routes that visit nonexisting stations, or routes that never reach the end station - instead they loop endlessly.
+
+
+They have therefore hired you to create a program that checks each route generated, determining whether the route is Valid, Impossible or Endless.
+
+\section*{Input}
+
+The first line of the input contains an integer $N$ ($2 \le N \le 100000$), the number of scavenger hunt stations in the hunt.
+The second line of input contains $N$ 32-bit signed integers.
+
+\section*{Output}
+
+Print whether the given route is Valid, Impossible or Endless.
+A route is valid if it reaches station N-1.
+A route is Impossible if it reaches a station that directs the player to go to a non-existent station.
+A route is Endless if it loops endlessly without reaching station N-1.
