@@ -1,27 +1,22 @@
-\problemname{Scavenger Hunt}
-
-A company is organizing a large scavenger hunt for its employees. 
-They've set up a lot of stations for the hunt. Each station is denoted by a number from 0 to N-1.
-Every group starts at station 0 (at the company office). At each station, they get redirected to 
-an arbitrary next stations, until they reach the last station, station N-1, where the summer party is waiting for them.
-
-The company has designed a generator to produce routes for the groups, so they get different routes. 
-A route is chain of stations (from $0$ to $N-1$). Not every route must visit every station - it is valid as long as it reaches the summer party.
-
-Unfortunately, they are not very good at IT. They have discovered that the generator sometimes produce
-bogus routes, such as routes that visit nonexisting stations, or routes that never reach the end station - instead they loop endlessly.
-
-
-They have therefore hired you to create a program that checks each route generated, determining whether the route is Valid, Impossible or Endless.
+\problemname{Canteen Rush}
+At 12:00 each day, the lecture ends for a lot of students at the ÆT-University. The ravenous students rush towards the canteens of the university to fulfill their hunger.
+\\\\
+However, there is a problem. The doors of the university are incredibly shabby, and definitely not up to code. They can only handle a certain number of people rushing through during lunch break before they break down for the day, trapping the poor students who didn’t make it through.
+\\\\
+Students start at different auditoriums around the campus, and must each make their way to one of the canteens. The university is a big building with numerous rooms, but luckily each room has a unique name.
+\\\\
+Your job is to find the maximum number of students who could theoretically make it to lunch each day.
 
 \section*{Input}
+\begin{itemize}
+    \item One line with an integer $A$ ($1 \leq A \le wip$), the number of auditoriums.
+    \item $A$ lines, each containing the name of the auditorium followed by an integer $p$, the number of people in the auditorium. The name consists of at most WIP lowercase characters.
+    \item One line with an integer $C$ ($1 <\leq C \le wip$), the number of canteens
+    \item $C$ lines, each line containing the name of a canteen.
+    \item One line with an integer $D$ ($1 \leq D \le wip$), the number of doors connecting the rooms.
+    \item $D$ lines containing room names $u$ and $v$, denoting that room u and v are connected by a door, and an integer $c$, denoting the capacity of the door.
 
-The first line of the input contains an integer $N$ ($2 \le N \le 100000$), the number of scavenger hunt stations in the hunt.
-The second line of input contains $N$ 32-bit signed integers.
+\end{itemize}
 
 \section*{Output}
-
-Print whether the given route is Valid, Impossible or Endless.
-A route is valid if it reaches station N-1.
-A route is Impossible if it reaches a station that directs the player to go to a non-existent station.
-A route is Endless if it loops endlessly without reaching station N-1.
+Output one integer, the maximum number of people who make it to a canteen.
