@@ -1,16 +1,21 @@
 \problemname{Canteen Rush}
-At 12:00 each day, the lecture ends for a lot of students at the ÆT-University. The ravenous students rush towards the canteens of the university to fulfill their hunger. However, there is a problem. The doors of the university are incredibly shabby, and definitely not up to code. They can only handle a certain number of people rushing through during lunch break before they break down for the day, trapping the poor students who didn’t make it through.
+At 12:00 each day, the lecture ends for a lot of students at the ÆT-University. The ravenous students rush towards the canteens of the university to fulfill their hunger. 
+However, there is a problem. The doors of the university are incredibly shabby, definitely not up to code and they are one way \(!?\). They can only handle a certain number of people 
+rushing through during lunch break before they break down for the day, trapping the poor students who didn’t make it through.
 \\\\
-Students start at different auditoriums around the campus, and must each make their way to one of the canteens. The university is a big building with numerous rooms, but luckily each room has a unique name. Your job is to find the maximum number of students who could theoretically make it to lunch each day.
+Students start at different auditoriums around the campus, and must each make their way to one of the canteens. The university is a big building with numerous connecting rooms, 
+each named uniquely . Luckily, the university wasn't completely heartless when designing the campus -- each auditorium has at least one path to a canteen. 
+Your job is to find the maximum number of students who can theoretically make it to lunch during these lunch rush hours.
 
 \section*{Input}
 \begin{itemize}
     \item One line with an integer $A$ ($1 \leq A \le wip$), the number of auditoriums.
-    \item $A$ lines, each containing the name of the auditorium followed by an integer $p$, the number of people in the auditorium. The name consists of at most WIP lowercase characters.
+    \item $A$ lines, each containing the name of the auditorium followed by an integer $p$, the number of people in the auditorium. The name consists of at most 20 lowercase characters, including digits and underscores.
     \item One line with an integer $C$ ($1 <\leq C \le wip$), the number of canteens
-    \item $C$ lines, each line containing the name of a canteen.
+    \item $C$ lines, each line containing the name of a canteen. The name consists of at most 20 lowercase characters, including digits and underscores.
     \item One line with an integer $D$ ($1 \leq D \le wip$), the number of doors connecting the rooms.
-    \item $D$ lines containing room names $u$ and $v$, denoting that room u and v are connected by a door, and an integer $c$, denoting the capacity of the door.
+    \item $D$ lines containing room names $u$ and $v$, denoting that room u and v are connected by a door, and an integer $c$, denoting the capacity of the door. The names consists of at most 20 lowercase characters, including digits and underscores.
+
 
 \end{itemize}
 
