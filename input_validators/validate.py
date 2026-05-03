@@ -24,7 +24,11 @@ for _ in range(A):
     if not re.fullmatch(r"^[a-z0-9_]+( ([1-9][0-9]*))", audit_line):
         print("expected a string and an integer separated by single spaces", file=sys.stderr)
         sys.exit(43)
-    auditoriums.append(audit_line.split()[0])
+    name = audit_line.split()[0]
+    if len(name) > 20:
+        print("The auditorium name should be 20 or less characters", file=sys.stderr)
+        sys.exit(43)
+    auditoriums.append(name)
 
 #Check C
 C_line = sys.stdin.readline()
@@ -44,6 +48,9 @@ for _ in range(C):
     # Check canteen names
     if not re.fullmatch(r"^[a-z0-9_]+", canteen_line):
         print("expected a lowercase string ", file=sys.stderr)
+        sys.exit(43)
+    if len(canteen_line) > 20:
+        print("The canteen name should be 20 or less characters", file=sys.stderr)
         sys.exit(43)
     canteens.append(canteen_line)
 
@@ -66,8 +73,11 @@ for _ in range(D):
     if not re.fullmatch(r"^[a-z0-9_]+( ([a-z0-9_])+)( ([1-9][0-9]*))", edges_line):
         print("Expected 2 string followed by 1 integer, separated by single spaces", file=sys.stderr)
         sys.exit(43)
-
+    
     spl = edges_line.split()
+    if len(spl[0]) > 20 or len(spl[1]) > 20 :
+        print("The connecting room names should be 20 or less characters", file=sys.stderr)
+        sys.exit(43)
     graph[spl[0]].append(spl[1])
 
 #we have graph - find one path from an auditorium to a canteen
