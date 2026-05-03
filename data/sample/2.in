@@ -1,15 +1,13 @@
 2
-aud0 10
-aud1 15
+aud0 3
+aud1 2
 3
 wicked_rabbit
 food_and_co
 yummy_yum
-7
-aud0 room_3 7
-aud1 room_1 5
-aud1 room_2 7
-room_2 room_3 5
+5
+aud0 room_1 5
+aud1 room_2 4
+room_2 wicked_rabbit 10
 room_1 yummy_yum 5
-room_3 wicked_rabbit 20
 room_2 food_and_co 6
