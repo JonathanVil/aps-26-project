@@ -2,7 +2,7 @@ import sys
 import re
 from collections import defaultdict
 
-# We are building the input validator based on the constraints in the input, 
+# We are building the input validator based on the constraints in the input,
 # and also under the constraint that at least one path between an auditorium and a canteen exists.
 
 #Check A
@@ -17,12 +17,14 @@ if A < 1:
     sys.exit(43)
 # remember to also check upper bound
 
+auditoriums = []
 for _ in range(A):
     audit_line = sys.stdin.readline().rstrip("\n")
     # Check auditorium names
     if not re.fullmatch(r"^[a-z0-9_]+( ([1-9][0-9]*))", audit_line):
         print("expected a string and an integer separated by single spaces", file=sys.stderr)
         sys.exit(43)
+    auditoriums.append(audit_line.split()[0])
 
 #Check C
 C_line = sys.stdin.readline()
@@ -36,12 +38,14 @@ if C < 1:
     sys.exit(43)
 # remember to also check upper bound
 
+canteens = []
 for _ in range(C):
-    audit_line = sys.stdin.readline().rstrip("\n")
+    canteen_line = sys.stdin.readline().rstrip("\n")
     # Check canteen names
-    if not re.fullmatch(r"^[a-z0-9_]+", audit_line):
+    if not re.fullmatch(r"^[a-z0-9_]+", canteen_line):
         print("expected a lowercase string ", file=sys.stderr)
         sys.exit(43)
+    canteens.append(canteen_line)
 
 #Check D
 D_line = sys.stdin.readline().rstrip("\n")
@@ -62,12 +66,26 @@ for _ in range(D):
     if not re.fullmatch(r"^[a-z0-9_]+( ([a-z0-9_])+)( ([1-9][0-9]*))", edges_line):
         print("Expected 2 string followed by 1 integer, separated by single spaces", file=sys.stderr)
         sys.exit(43)
-    
+
     spl = edges_line.split()
     graph[spl[0]].append(spl[1])
-    
 
 #we have graph - find one path from an auditorium to a canteen
+def pathToCanteen(src): # returns whether src has a path to a canteen
+    if src in canteens:
+        return True
+    else:
+        for child in graph[src]:
+            result = pathToCanteen(child)
+            if result:
+                return True
+    return False
+
+for aud in auditoriums:
+    if not pathToCanteen(aud):
+        print("There must be at least one path from each auditorium to a canteen", file=sys.stderr)
+        sys.exit(43)
+
 if sys.stdin.readline() != "":
     sys.exit(43)
 
