@@ -1,7 +1,9 @@
 from collections import defaultdict
+import sys
 
 # all graphs are (default) dictionaries
 # vertex -> (vertex -> capacity), by default capacity is 0
+
 
 def bfs(graph,src,dest,mincap=0): # returns path to dest or reachable set
     parent = {src:src}
@@ -61,9 +63,7 @@ def flow(orggraph, src,dest):
                             for a,d in orggraph.items() },
                         p_or_seen)
         p = p_or_seen
-        #print("path:", *reversed(p))
         saturation = min( graph[u][v] for u,v in p )
-        #print(current_flow,saturation)#,[f"{u[0]}-{u[1]}:{orggraph[u[0]][u[1]]}:{graph[u][v]}" for u,v in p if u[2]==0])
         current_flow += saturation
         for u,v in p:
             graph[u][v] -= saturation
@@ -81,13 +81,12 @@ for _ in range(A):
 C = int(input())
 for _ in range(C):
     name = input()
-    graph[name]["supersink"] = float('inf')
+    graph[name]["supersink"] = sys.maxsize
 D = int(input())
 for _ in range(D):
     src, dst, p= input().split()
     capacity = int(p)
     graph[src][dst] = capacity
-
 
 flowvalue, residual_graph, cut = flow(graph, "supersource", "supersink")
 print(flowvalue)
