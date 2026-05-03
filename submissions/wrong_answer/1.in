@@ -1,0 +1,9 @@
+1
+aud0 5
+1
+wicked_rabbit
+4
+aud0 room_1 2
+aud0 room_2 3
+room_1 wicked_rabbit 2
+room_2 wicked_rabbit 2
