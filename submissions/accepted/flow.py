@@ -1,11 +1,7 @@
 from collections import defaultdict
-import sys
-
-#sys.setrecursionlimit(10**6)
 
 # all graphs are (default) dictionaries
 # vertex -> (vertex -> capacity), by default capacity is 0
-
 
 def bfs(graph,src,dest,mincap=0): # returns path to dest or reachable set
     parent = {src:src}
@@ -85,8 +81,7 @@ for _ in range(A):
 C = int(input())
 for _ in range(C):
     name = input()
-    graph[name]["supersink"] = sys.maxsize
-
+    graph[name]["supersink"] = float('inf')
 D = int(input())
 for _ in range(D):
     src, dst, p= input().split()
