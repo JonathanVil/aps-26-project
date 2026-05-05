@@ -73,22 +73,25 @@ for _ in range(D):
     if not re.fullmatch(r"^[a-z0-9_]+( ([a-z0-9_])+)( ([1-9][0-9]*))", edges_line):
         print("Expected 2 string followed by 1 integer, separated by single spaces", file=sys.stderr)
         sys.exit(43)
-    
+
     spl = edges_line.split()
     if len(spl[0]) > 20 or len(spl[1]) > 20 :
         print("The connecting room names should be 20 or less characters", file=sys.stderr)
         sys.exit(43)
     graph[spl[0]].append(spl[1])
 
-#we have graph - find one path from an auditorium to a canteen
-def pathToCanteen(src): # returns whether src has a path to a canteen
+# we have graph - find one path from an auditorium to a canteen
+def pathToCanteen(src, visited=None):  # returns whether src has a path to a canteen
+    if visited is None:
+        visited = set()
+    if src in visited:
+        return False
+    visited.add(src)
     if src in canteens:
         return True
-    else:
-        for child in graph[src]:
-            result = pathToCanteen(child)
-            if result:
-                return True
+    for child in graph[src]:
+        if pathToCanteen(child, visited):
+            return True
     return False
 
 for aud in auditoriums:
