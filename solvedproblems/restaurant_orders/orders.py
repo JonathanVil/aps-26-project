@@ -1,7 +1,4 @@
-from collections import defaultdict
-import sys
-sys.setrecursionlimit(10**6)
-max_order_price = 11
+max_order_price = 30000
 
 nr_of_items = int(input())
 menu = list(map(int, input().split()))
@@ -11,55 +8,63 @@ orders = list(map(int, input().split()))
 # -1 = impossible
 # 0 = possible
 # 1 = ambiguous
-# build matrix
+# build matrix 
 possible = [[-1 for _ in range(nr_of_items + 1)] for _ in range(max_order_price + 1)]
 possible[0][0] = 0
-for price in range(max_order_price + 1):
-    for item in range(1, nr_of_items + 1):
-        if possible[price][item-1] == 0:
-            # all multitudes of item shall be set to 0.
-            for i in range (price, max_order_price+1, menu[item-1]):
-                possible[i][item] += 1
-                if i > max_order_price:
-                    break 
+
+for item in range(1, nr_of_items + 1):
+    for price in range(max_order_price + 1):
+        left = possible[price][item-1]
+
+        # we see if we've already used this item once. -1 for no and >= 0 for yeap.
+        used = -1
+        if price >= menu[item-1]:
+            used = possible[price-menu[item-1]][item] 
+        if left == -1 and used == -1: #
+            continue
+        elif left >= 0 and used >= 0: 
+            possible[price][item] = 1 # its ambiguous - we can both get here from previous item and with current item
+        else:
+            possible[price][item] = 0  # there is exactly one way
 
 def solve(x):
     global possible
-    colon = len(menu)
+    leftmostitem = len(menu)
     valid_order = []
 
-    i = colon
-    while (i >= 0):
-        value = possible[x][i]
+    item = leftmostitem
+    price = x 
+
+    while True:
+        #print("price: ", price)
+        #print("item: ", item)
+        value = possible[price][item]
+        
+        left_item = possible[price][item-1]
+        #print("left item: ", left_item)
         if value > 0:
             print("Ambiguous")
             break
-        elif value == 0:
-            i -= 1
-        elif value < 0:
-            if (i+1) < colon and value == 0:
-                valid_order.append(menu[i+1])
-                x = -menu[i+1]
-                i+=1
-            else:
-                print("Impossible")
+        if left_item >= 0:   
+            item -= 1
+        elif price - menu[item-1] >= 0 and possible[price - menu[item-1]][item] >= 0:
+            price = price - menu[item-1]
+            valid_order.append(item)
+            if price == 0:
+                valid_order.sort()
+                res = map(str, valid_order)
+                print(" ".join(res))
                 break
-    print(valid_order)
-                
-
-
-    
-
-
-
+        else:
+            print("Impossible")
+            break
 
 def pretty_print(possible):
     rows = len(possible)
     cols = len(possible[0])
 
-    # Print matrix (y reversed so 0 is at bottom)
     for price in reversed(range(rows)):
-        print(f"{price:4} |", end="")  # y-axis labels on the left
+        print(f"{price:4} |", end="") 
         for item in range(cols):
             val = possible[price][item]
             if val == -1:
@@ -68,15 +73,14 @@ def pretty_print(possible):
                 print(f"{val:4}", end="")
         print()
 
-    # Separator line
     print("      " + "----" * cols)
 
-    # Bottom x-axis labels
     print("      ", end="")
     for item in range(cols):
         print(f"{item:4}", end="")
     print()
 
-pretty_print(possible)
+#pretty_print(possible)
 
-solve(6)
+for order in orders:
+    solve(order)
