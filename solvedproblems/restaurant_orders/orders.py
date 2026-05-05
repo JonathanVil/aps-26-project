@@ -17,12 +17,12 @@ for item in range(1, nr_of_items + 1):
         left = possible[price][item-1]
 
         # we see if we've already used this item once. -1 for no and >= 0 for yeap.
-        used = -1
+        alreadyused = -1
         if price >= menu[item-1]:
-            used = possible[price-menu[item-1]][item] 
-        if left == -1 and used == -1: #
+            alreadyused = possible[price-menu[item-1]][item] 
+        if left == -1 and alreadyused == -1: #
             continue
-        elif left >= 0 and used >= 0: 
+        elif left >= 0 and alreadyused >= 0: 
             possible[price][item] = 1 # its ambiguous - we can both get here from previous item and with current item
         else:
             possible[price][item] = 0  # there is exactly one way
