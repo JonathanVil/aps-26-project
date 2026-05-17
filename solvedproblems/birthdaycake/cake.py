@@ -52,14 +52,14 @@ for i in range(m):
     slices += 1
     for j in range(i):
         a2,b2,c2 = cuts[j]
-        intersection = a1*b2 - a2*b1
-        if intersection != 0: # they intersect! find the intersection coordinate!
-            x = ((b1*c2)- (b2*c1))/((a1*b2) - (a2*b1))
+        intersection = a1*b2 - a2*b1  # formula to get a value that != 0 if the lines intersect
+        if intersection != 0: # they intersect! find the intersection coordinate using cool formulas!
+            x = ((b1*c2)- (b2*c1))/((a1*b2) - (a2*b1)) 
             y = ((a2*c1)- (a1*c2))/((a1*b2) - (a2*b1))
 
-            # check if its inside the circle :3
+            # check if its inside the circle :3 using a cool formula
             d = math.sqrt(math.pow(x,2)+math.pow(y,2))
-            if d < r: #its inside the circle!
+            if d < r: # its inside the circle!
                 slices +=1
 
 if slices > n:
