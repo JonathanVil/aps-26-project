@@ -36,12 +36,9 @@ def solve(x):
     price = x 
 
     while True:
-        #print("price: ", price)
-        #print("item: ", item)
         value = possible[price][item]
         
         left_item = possible[price][item-1]
-        #print("left item: ", left_item)
         if value > 0:
             print("Ambiguous")
             break
@@ -58,29 +55,6 @@ def solve(x):
         else:
             print("Impossible")
             break
-
-def pretty_print(possible):
-    rows = len(possible)
-    cols = len(possible[0])
-
-    for price in reversed(range(rows)):
-        print(f"{price:4} |", end="") 
-        for item in range(cols):
-            val = possible[price][item]
-            if val == -1:
-                print("   .", end="")
-            else:
-                print(f"{val:4}", end="")
-        print()
-
-    print("      " + "----" * cols)
-
-    print("      ", end="")
-    for item in range(cols):
-        print(f"{item:4}", end="")
-    print()
-
-#pretty_print(possible)
 
 for order in orders:
     solve(order)
